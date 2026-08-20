@@ -1,59 +1,462 @@
---- 
-layout: default 
-title:
-description: Sharing about Application Development, Integration, Cloud, Big Data and Digital Transformation 
-comments: true 
----
+<!doctype html>
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Zachary Baker's accounting, financial operations, data analysis, and geospatial project portfolio.">
+  <title>Zachary Baker | Accounting &amp; Data Analysis</title>
+  <style>
+    :root {
+      --ink: #10243e;
+      --muted: #52647a;
+      --paper: #f4f7f9;
+      --card: #ffffff;
+      --accent: #087f8c;
+      --accent-dark: #055f69;
+      --line: #dce5ea;
+      --warm: #eaf4f5;
+      --shadow: 0 16px 40px rgba(16, 36, 62, 0.08);
+      --radius: 18px;
+      --width: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      padding: 0.75rem 1rem;
+      background: var(--ink);
+      color: #fff;
+      z-index: 10;
+    }
+
+    .skip-link:focus { left: 1rem; top: 1rem; }
+
+    .shell {
+      width: min(calc(100% - 2rem), var(--width));
+      margin-inline: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: rgba(244, 247, 249, 0.92);
+      border-bottom: 1px solid rgba(220, 229, 234, 0.9);
+      backdrop-filter: blur(12px);
+    }
+
+    nav {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.15rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 0.93rem;
+      font-weight: 650;
+      color: var(--muted);
+    }
+
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover, .nav-links a:focus { color: var(--accent-dark); }
+
+    .hero {
+      padding: 6.5rem 0 5rem;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(8, 127, 140, 0.16), transparent 28rem),
+        linear-gradient(135deg, #f8fbfc 0%, #edf5f6 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 0.9rem;
+      color: var(--accent-dark);
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 { line-height: 1.16; }
+
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      font-size: clamp(2.7rem, 7vw, 5.6rem);
+      letter-spacing: -0.055em;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      margin: 1.4rem 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 2rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0.7rem 1rem;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      font-weight: 750;
+      text-decoration: none;
+      transition: transform 160ms ease, background 160ms ease, color 160ms ease;
+    }
+
+    .button:hover, .button:focus { transform: translateY(-2px); }
+    .button.primary { background: var(--ink); color: #fff; }
+    .button.secondary { background: transparent; }
+
+    section { padding: 5rem 0; }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 2.2rem;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      letter-spacing: -0.045em;
+    }
+
+    .section-head p { margin: 0; color: var(--muted); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1rem;
+    }
+
+    .project {
+      grid-column: span 6;
+      display: flex;
+      flex-direction: column;
+      min-height: 310px;
+      padding: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .project.featured { grid-column: span 8; }
+    .project.compact { grid-column: span 4; }
+
+    .tag {
+      width: fit-content;
+      margin: 0 0 1rem;
+      padding: 0.26rem 0.64rem;
+      color: var(--accent-dark);
+      background: var(--warm);
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .project h3 { margin: 0; font-size: 1.5rem; letter-spacing: -0.025em; }
+    .project p { color: var(--muted); }
+
+    .project-meta {
+      margin-top: auto;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--line);
+      color: var(--ink);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: var(--accent-dark);
+      font-weight: 800;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.22em;
+    }
+
+    .skills { background: var(--ink); color: #fff; }
+    .skills .section-head p { color: #c7d3df; }
+
+    .skill-group {
+      grid-column: span 3;
+      padding: 1.3rem;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.055);
+    }
+
+    .skill-group h3 { margin-top: 0; font-size: 1rem; color: #8ed3da; }
+    .skill-group p { margin-bottom: 0; color: #e2eaf0; }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .panel {
+      padding: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .panel h3 { margin-top: 0; }
+    .panel p { color: var(--muted); }
+
+    .timeline {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .timeline li + li { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+    .timeline strong { display: block; }
+    .timeline span { color: var(--muted); }
+
+    .contact {
+      text-align: center;
+      background: linear-gradient(135deg, #dfeff1, #f5f9fa);
+      border-top: 1px solid var(--line);
+    }
+
+    .contact h2 { margin: 0; font-size: clamp(2rem, 5vw, 3.8rem); letter-spacing: -0.045em; }
+    .contact p { max-width: 620px; margin: 1rem auto 0; color: var(--muted); }
+    .contact .actions { justify-content: center; }
+
+    footer { padding: 1.4rem 0; color: var(--muted); font-size: 0.88rem; }
+    footer .shell { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+
+    @media (max-width: 820px) {
+      .hero { padding-top: 4.5rem; }
+      .section-head, .two-column { grid-template-columns: 1fr; }
+      .project, .project.featured, .project.compact, .skill-group { grid-column: 1 / -1; }
+      .nav-links { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .button { transition: none; }
+    }
+  </style>
 </head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-86HNEGBVEL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  gtag('config', 'G-86HNEGBVEL');
-</script>
-<div>
-	<h3>Hello, my name is Zachary Baker, and this is my website for all of my ongoing projects. I like to dive into all kinds of topics, but I mostly do data analysis, work on Blockchain projects or gather Lidar data with my custom-built drone to use on GIS projects. <br> I have over 7 years of work experience in the IT sector with a Bachelors in Economics and Associates in Computer Science, I use my skills learning new technologies with hopes to create something that can be implemented in the financial or energy sector. </h3> <p> As a veteran I believe in helping my community the best I can and that is my main mission.</p>
-</div>
-<div>
-	<ul>
-		<p> <a href="https://zack7891.github.io/ForestFires-Visual-Analysis/">Brazil Forest Fires in R</a> 
-		</p>
-		<p> <a href="https://github.com/zack7891/HomeInvestor">HomeInvestor DApp in C#</a> 
-		</p>
-		<p> <a href="Pages/gis.html">Geographic Information System Homework</a> 
-		</p>
-		<p> <a href="https://zacharyforyou.school.blog/">Advanced Statistics & Analytics in R Homework</a> 
-		</p>	
-		<p> <a href="https://zack7891.github.io/FEC_Analysis/">Finanical Election Contributions Analysis in R</a> 
-		</p>
-		<p> <a href="https://github.com/zack7891/PlantTracking/blob/main/main.py">Plant Tracker in Python</a> 
-		</p>
-	</ul>
-</div>
-<!-- Pagination links -->
-<div class="container" >
-{% if paginator.previous_page %}
-	<a href="{{ paginator.previous_page_path }}" >
-	Previous
-	</a>
-{% else %}
-	<span>Previous</span>
-{% endif %}
-| <span class="page_number ">
-	Page: {{ paginator.page }} of {{ paginator.total_pages }}
-</span> | 
-{% if paginator.next_page %}
-	<a href="{{ paginator.next_page_path }}" >Next</a>
-{% else %}
-	<span >Next</span>
-{% endif %}
-</div>
+  <header>
+    <nav class="shell" aria-label="Main navigation">
+      <a class="brand" href="#top">Zachary Baker</a>
+      <ul class="nav-links">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#background">Background</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="shell">
+        <p class="eyebrow">Accounting · Financial Operations · Data Analysis</p>
+        <h1>I turn complex records into useful decisions.</h1>
+        <p class="hero-copy">I combine an economics background, accounting education, hands-on business operations, and technical analysis. My work spans financial and public datasets, dashboards, statistical analysis, programming, and geospatial research.</p>
+        <div class="actions">
+          <a class="button primary" href="#projects">Explore my projects</a>
+          <a class="button secondary" href="Zachary_Baker_Resume_Accounting_Data_Analyst.pdf" target="_blank" rel="noopener">Download resume</a>
+          <a class="button secondary" href="https://github.com/zack7891" target="_blank" rel="noopener">View GitHub profile</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Selected work</p>
+            <h2>Analysis backed by visible evidence.</h2>
+          </div>
+          <p>These projects show how I clean data, connect datasets, analyze patterns, and communicate findings using statistical, visualization, geospatial, and programming tools.</p>
+        </div>
+
+        <div class="grid">
+          <article class="project featured">
+            <p class="tag">Financial data</p>
+            <h3>Federal Election Contributions Analysis</h3>
+            <p>Combined candidate finance records with 2020 federal election results, standardized party classifications, addressed missing values, and compared receipts and contributions across states, parties, and offices.</p>
+            <p class="project-meta">R · tidyverse · dplyr · ggplot2 · Plotly · data joins</p>
+            <a class="project-link" href="https://zack7891.github.io/FEC_Analysis/" target="_blank" rel="noopener">View the analysis</a>
+          </article>
+
+          <article class="project compact">
+            <p class="tag">Geospatial analysis</p>
+            <h3>ArcGIS Mapping Portfolio</h3>
+            <p>Created thematic maps examining burglary, robbery, assault, and other geographic patterns across multiple study areas.</p>
+            <p class="project-meta">ArcGIS · spatial analysis · thematic mapping</p>
+            <a class="project-link" href="https://zack7891.github.io/Pages/gis.html" target="_blank" rel="noopener">View the maps</a>
+          </article>
+
+          <article class="project">
+            <p class="tag">Environmental data</p>
+            <h3>Brazil Forest Fires Visual Analysis</h3>
+            <p>Analyzed 6,454 observations from 1998 through 2017, aggregated fire activity by year and state, geocoded locations, and created interactive statistical and geographic visualizations.</p>
+            <p class="project-meta">R · dplyr · ggplot2 · Plotly · ggmap</p>
+            <a class="project-link" href="https://zack7891.github.io/ForestFires-Visual-Analysis/" target="_blank" rel="noopener">View the analysis</a>
+          </article>
+
+          <article class="project">
+            <p class="tag">Economic analysis</p>
+            <h3>Housing Price Analysis</h3>
+            <p>Used federal housing data to examine average changes in housing prices and organize the analysis in a reproducible R project.</p>
+            <p class="project-meta">R · federal housing data · trend analysis</p>
+            <a class="project-link" href="https://github.com/zack7891/Housing-Prediction" target="_blank" rel="noopener">View the repository</a>
+          </article>
+
+          <article class="project compact">
+            <p class="tag">Application development</p>
+            <h3>Plant Tracking Application</h3>
+            <p>Built a desktop tool that records, validates, displays, and exports planting information through a graphical interface.</p>
+            <p class="project-meta">Python · Tkinter · CSV processing · input validation</p>
+            <a class="project-link" href="https://github.com/zack7891/PlantTracking" target="_blank" rel="noopener">View the code</a>
+          </article>
+
+          <article class="project featured">
+            <p class="tag">Additional work</p>
+            <h3>Programming and data-science repositories</h3>
+            <p>My GitHub profile also includes C# application work, Python data-science exercises, text-mining assignments, housing analysis, and machine-learning experiments.</p>
+            <p class="project-meta">C# · Python · R · machine learning · text mining</p>
+            <a class="project-link" href="https://github.com/zack7891?tab=repositories" target="_blank" rel="noopener">Browse all repositories</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="skills" id="skills">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Capabilities</p>
+            <h2>Business context meets technical range.</h2>
+          </div>
+          <p>I use technical tools to support accurate reporting, investigate discrepancies, organize records, and explain what the data means.</p>
+        </div>
+
+        <div class="grid">
+          <div class="skill-group">
+            <h3>Accounting &amp; Operations</h3>
+            <p>Invoicing, payments, purchasing, purchase orders, transaction records, discrepancy research, process documentation</p>
+          </div>
+          <div class="skill-group">
+            <h3>Reporting &amp; BI</h3>
+            <p>Excel, PivotTables, VLOOKUP, Power BI, SQL Azure, dashboards, data visualization</p>
+          </div>
+          <div class="skill-group">
+            <h3>Statistics &amp; Spatial</h3>
+            <p>R, Stata, ArcGIS, regression, ANOVA, chi-square testing, spatial and trend analysis</p>
+          </div>
+          <div class="skill-group">
+            <h3>Programming</h3>
+            <p>Python, C#, SQL, data cleaning, CSV processing, graphical applications, technical troubleshooting</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="background">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Background</p>
+            <h2>A multidisciplinary foundation.</h2>
+          </div>
+          <p>My experience connects financial operations, data analysis, information systems, and customer-focused problem solving.</p>
+        </div>
+
+        <div class="two-column">
+          <div class="panel">
+            <h3>Experience highlights</h3>
+            <ul class="timeline">
+              <li><strong>TechROM LLC</strong><span>Invoicing, customer payments, purchasing, vendor coordination, and business records</span></li>
+              <li><strong>Tampa Bay Buccaneers</strong><span>Purchase-order, asset, vendor, and cost tracking</span></li>
+              <li><strong>Welbilt, Inc.</strong><span>Power BI and SQL Azure dashboards, Excel analysis, and an 88% vulnerability-backlog reduction</span></li>
+              <li><strong>KForce / City of Tampa</strong><span>High-volume issue investigation, documentation, and cross-team resolution</span></li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h3>Education</h3>
+            <ul class="timeline">
+              <li><strong>Western Governors University</strong><span>B.S. Accounting, expected December 2026</span></li>
+              <li><strong>University of South Florida</strong><span>B.A. Economics, 2020</span></li>
+              <li><strong>Santa Fe College</strong><span>Associate of Arts, 2020</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="shell">
+        <p class="eyebrow">Contact</p>
+        <h2>Let’s work with the data.</h2>
+        <div class="actions">
+          <a class="button primary" href="mailto:zchrybkr@gmail.com">Email Zachary</a>
+          <a class="button secondary" href="https://github.com/zack7891" target="_blank" rel="noopener">GitHub profile</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <span>© 2026 Zachary Baker</span>
+      <span>Accounting · Financial Operations · Data Analysis</span>
+    </div>
+  </footer>
+</body>
+</html>
